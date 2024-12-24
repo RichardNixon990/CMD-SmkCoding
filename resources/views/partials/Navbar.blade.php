@@ -1,5 +1,4 @@
 
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 15px">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
@@ -17,9 +16,18 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
+          @if (Auth::check())
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link" href="{{route('auth.logout')}}">Logout</a>
           </li>
+      @else
+          <li class="nav-item">
+              <a class="nav-link" href="{{route('auth.login')}}">Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{route('auth.register')}}">Register</a>
+          </li>
+      @endif
         </ul>
       </div>
     </div>

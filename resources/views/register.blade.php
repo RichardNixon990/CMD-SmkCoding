@@ -10,7 +10,8 @@
 <body>
 
         <div class="d-flex justify-content-center align-items-center vh-100">
-            <form class="w-50">
+            <form class="w-50" action="{{route('auth.signup')}}" method="post">
+                @csrf
                 <h1 class="text-center my-2">Register</h1>
                 <div class="mb-3">
                     <label for="exampleInputUsername" class="form-label">Username</label>
@@ -18,6 +19,7 @@
                         type="text"
                         class="form-control"
                         id="exampleInputUsername"
+                        name="name"
                     >
                 </div>
 
@@ -28,6 +30,7 @@
                         class="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
+                        name="email"
                     >
                     <div id="emailHelp" class="form-text">
                         We'll never share your email with anyone else.
@@ -40,6 +43,7 @@
                         type="password"
                         class="form-control"
                         id="exampleInputPassword1"
+                        name="password"
                     >
                 </div>
 
