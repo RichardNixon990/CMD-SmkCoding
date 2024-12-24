@@ -1,12 +1,16 @@
 @extends('layouts.main')
 @section('Content')
     <div>
+        @if ($data != null)
+        <form action="{{ route('artikel.update', $data->id ) }}" method="POST" enctype="multipart/form-data">
+    @else
         <form action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data">
+    @endif
             @csrf
             <div class="mb-3">
                 <label for="judul" class="form-label">Judul</label>
                 <input type="text" class="form-control @error('Judul') is-invalid @enderror" id="judul" name="Judul"
-                    value="{{ old('Judul') }}">
+                    value="{{ $data!= null ? $data->judul : old('Judul') }}">
                 @error('Judul')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -14,22 +18,23 @@
                 @enderror
             </div>
             <br>
-            <div class="mb-3">
-                <i class="mb-3">Jika Belum Ada Kategori Silahkan buat kategori terlebih dahulu. <a href="/"
-                        style="color: blue; cursor: pointer">Buat Kategori</a></i>
-                <select class="form-select" aria-label="category" name="kategori">
-                    <option selected disabled>Pilih Kategori</option>
-                    @foreach ($Kategori as $k)
-                        <option value="{{ $k->id }}">{{ $k->judul_kategori }}</option>
-                    @endforeach
-
-                </select>
-            </div>
+           <div class="mb-3">
+            <p>Belum memiliki kategori?<a href="{{ route('kategori.add') }}"><i> Buat kategori di sini</i></a></p>
+            <select class="form-select" aria-label="kategori" name="kategori">
+                <option {{ $data != null ? '' : 'selected' }} disabled>Pilih Kategori</option>
+                @foreach ($Kategori as $k)
+                    <option value="{{ $k->id }}"
+                        {{ $data != null && $data->category_id == $k->id ? 'selected' : '' }}>
+                        {{ $k->judul_kategori }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
             <br>
             <div class="mb-3">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control @error('Deskripsi') is-invalid @enderror" id="deskripsi" rows="3" name="Deskripsi">{{ old('Deskripsi') }}</textarea>
+                <textarea class="form-control @error('Deskripsi') is-invalid @enderror" id="deskripsi" rows="3" name="Deskripsi">{{ $data!= null ? $data->body : old('Deskripsi') }}</textarea>
                 @error('Deskripsi')
                     <div class="invalid-feedback">
                         {{ $message }}

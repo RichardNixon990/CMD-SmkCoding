@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
           @if (Auth::check() && Auth::user()->role == 'admin')
           <li class="nav-item dropdown">
@@ -18,8 +18,8 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{{route('artikel.add')}}">Create Article</a></li>
-                  <li><a class="dropdown-item" href="">Manage Article</a></li>
-                  <li><a class="dropdown-item" href="">Manage Users</a></li>
+                  <li><a class="dropdown-item" href="{{route('artikel.manage')}}">Manage Article</a></li>
+                  <li><a class="dropdown-item" href="{{route('manageuser')}}">Manage Users</a></li>
               </ul>
           </li>
       @endif
