@@ -8,14 +8,21 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+          @if (Auth::check() && Auth::user()->role == 'admin')
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin Tools
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{{route('artikel.add')}}">Create Article</a></li>
+                  <li><a class="dropdown-item" href="">Manage Article</a></li>
+                  <li><a class="dropdown-item" href="">Manage Users</a></li>
+              </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
+      @endif
           @if (Auth::check())
           <li class="nav-item">
               <a class="nav-link" href="{{route('auth.logout')}}">Logout</a>
